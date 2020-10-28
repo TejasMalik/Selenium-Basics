@@ -1,0 +1,78 @@
+java -jar selenium-server-standalone-3.14.0.jar -role hub
+Above command will start a Selenium grid server
+=====================================================================================
+java -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5558 
+Above code will start a node with default 5 firefox, 5 chrome and 1 IE browser
+java -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5557
+Above code will start a node with default 5 firefox, 5 chrome and 1 IE browser
+==============================================================================================
+" ctrl+c " is hotkey to shutdown hub or node
+netstat -a is the command to get the list of all used ports in Windows
+===================================================================================
+The above above commands open to nodes with default 5 chrome, 5 firefox and 1 ie browsers
+
+if we want only one browser of my type....
+
+java -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5558 -browser browserName=iexplore -browser browserName=chrome -browser browserName=firefox
+
+
+java -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5557 -browser browserName=chrome
+
+============================================================================================
+
+if we want one more browser of my type just append -browser browserName=chrome
+java -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5558 -browser browserName=chrome,maxInstances=10 -browser browserName=iexplore,maxInstances=10
+java -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5557 -browser browserName=chrome -browser browserName=firefox
+
+============================================================================================
+
+useof : maxInstances and maxSession
+
+observer the above cmd command for node1 and node 2, if you want to open the 3 browsers of same type no need to
+type -browser browserName=firefox 3 time instead of that you can type 
+java -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5556 -browser browserName=chrome,maxInstances=10 -browser browserName=iexplore,maxInstances=10 -browser browserName=firefox,maxInstances=10
+java -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5557 -browser browserName=chrome,maxInstances=3
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+java -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5556 -browser browserName=iexplore,maxInstances=3 -browser browserName=chrome,maxInstances=2
+java -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5557 -browser browserName=chrome,maxInstances=3 -browser browserName=firefox,maxInstances=2
+
+above command opens 3 ie and 2 chrome browser for node1
+above command opens 3 chrome and 2 firefox browser for node2
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+user of :maxSession
+By default a node allow parallely to run 5 browsers at a time max. we call that as sessions.
+so if you want to change the sessions you append maxSession 3/any number
+java -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5556 -maxSession 3
+
+========================================================================================================
+-Dwebdriver.gecko.driver
+-Dwebdriver.chrome.driver
+-Dwebdriver.ie.driver
+when we want to work with thirdparty browsers we need to upload the respective exe files to the node...cmd for this is 
+
+java -Dwebdriver.gecko.driver="C:\Users\tmalik8\Documents\SeleniumFiles For Basics\GridNotes\BrowserDrivers\geckodiriver.exe" -Dwebdriver.ie.driver="C:\Users\tmalik8\Documents\SeleniumFiles For Basics\GridNotes\BrowserDrivers\IEDriverServer.exe" -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5557 -browser browserName=chrome,maxInstances=10 -maxSession 8
+java -Dwebdriver.chrome.driver=C:\Users\pc\Desktop\AllFiles\Grid+Maven\GridNotes\BrowserDrivers\chromedriver.exe -Dwebdriver.ie.driver=C:\Users\pc\Desktop\AllFiles\Grid+Maven\GridNotes\BrowserDrivers\IEDriverServer.exe -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5557
+===========================================================================================
+java -Dwebdriver.gecko.driver="C:\Users\tmalik8\Documents\SeleniumFiles For Basics\GridNotes\BrowserDrivers\geckodriver.exe" -Dwebdriver.chrome.driver="C:\Users\tmalik8\Documents\SeleniumFiles For Basics\GridNotes\BrowserDrivers\chromedriver.exe" -Dwebdriver.ie.driver="C:\Users\tmalik8\Documents\SeleniumFiles For Basics\GridNotes\BrowserDrivers\IEDriverServer.exe" -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://localhost:4444/grid/register -port 5558
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
